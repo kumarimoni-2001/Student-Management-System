@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2 style="text-align: center;">👤 Add New Student</h2>
+    
+    <form method="post" style="margin-top: 30px;">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="name">👤 Full Name</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Enter student's full name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="roll_number">🔢 Roll Number</label>
+            <input type="text" class="form-control" id="roll_number" name="roll_number" placeholder="Enter roll number" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="student_id">🆔 Student ID</label>
+            <input type="text" class="form-control" id="student_id" name="student_id" placeholder="Enter student ID" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="email">📧 Email Address</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Enter email address" required>
+        </div>
+        
+        <div style="text-align: center; margin-top: 40px;">
+            <button type="submit" class="btn btn-primary">
+                <span style="margin-right: 10px;">💾</span> Save Student
+            </button>
+            <button type="reset" class="btn btn-secondary" style="margin-left: 15px;">
+                <span style="margin-right: 10px;">🔄</span> Reset
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

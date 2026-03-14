@@ -1,0 +1,842 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    :root {
+        --primary: #4361ee;
+        --secondary: #3f37c9;
+        --success: #4cc9f0;
+        --danger: #f72585;
+        --warning: #f8961e;
+        --info: #4895ef;
+        --light: #f8f9fa;
+        --dark: #212529;
+        --white: #ffffff;
+        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+        --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+        --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+        --shadow-hover: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #f0f2f5;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: var(--gradient-1);
+        border-radius: 30px;
+        padding: 60px 50px;
+        margin-bottom: 60px;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        animation: fadeInDown 1s ease;
+    }
+
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .hero-section::before {
+        content: "📚🎓";
+        position: absolute;
+        right: -20px;
+        bottom: -40px;
+        font-size: 250px;
+        opacity: 0.1;
+        transform: rotate(-10deg);
+        white-space: nowrap;
+    }
+
+    .hero-section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    }
+
+    .hero-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        line-height: 1.2;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        opacity: 0.95;
+        max-width: 600px;
+        position: relative;
+        z-index: 1;
+        line-height: 1.6;
+    }
+
+    .hero-stats {
+        display: flex;
+        gap: 50px;
+        margin-top: 50px;
+        position: relative;
+        z-index: 1;
+        flex-wrap: wrap;
+    }
+
+    .hero-stat-item {
+        text-align: center;
+        background: rgba(255,255,255,0.1);
+        padding: 20px 30px;
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.2);
+        transition: all 0.3s ease;
+        min-width: 150px;
+    }
+
+    .hero-stat-item:hover {
+        transform: translateY(-5px);
+        background: rgba(255,255,255,0.2);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .hero-stat-number {
+        font-size: 2.8rem;
+        font-weight: 800;
+        display: block;
+        margin-bottom: 5px;
+        background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hero-stat-label {
+        font-size: 1rem;
+        opacity: 0.9;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    /* Section Headers */
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        gap: 20px;
+        animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        background: var(--gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    .section-title::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 4px;
+        background: var(--gradient-1);
+        border-radius: 2px;
+        transition: width 0.3s ease;
+    }
+
+    .section-title:hover::after {
+        width: 100px;
+    }
+
+    .view-all-link {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        background: var(--white);
+        border-radius: 50px;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(67, 97, 238, 0.1);
+    }
+
+    .view-all-link:hover {
+        gap: 15px;
+        background: var(--gradient-1);
+        color: var(--white);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Features Grid */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 30px;
+        margin: 50px 0 70px;
+        animation: fadeInUp 1s ease;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .feature-card {
+        background: var(--white);
+        border-radius: 25px;
+        padding: 40px 30px;
+        text-align: center;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .feature-card:nth-child(1) {
+        border-bottom: 5px solid var(--primary);
+    }
+    .feature-card:nth-child(2) {
+        border-bottom: 5px solid var(--success);
+    }
+    .feature-card:nth-child(3) {
+        border-bottom: 5px solid var(--warning);
+    }
+    .feature-card:nth-child(4) {
+        border-bottom: 5px solid var(--danger);
+    }
+
+    .feature-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(67, 97, 238, 0.05) 0%, rgba(63, 55, 201, 0.05) 100%);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .feature-card:hover::before {
+        transform: translateY(0);
+    }
+
+    .feature-icon {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        text-align: center;
+        font-size: 3rem;
+        margin: 0 auto 25px;
+        background: linear-gradient(135deg, #667eea10 0%, #764ba210 100%);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    .feature-card:nth-child(1) .feature-icon {
+        background: linear-gradient(135deg, #4361ee20 0%, #3f37c920 100%);
+        color: var(--primary);
+    }
+    .feature-card:nth-child(2) .feature-icon {
+        background: linear-gradient(135deg, #4cc9f020 0%, #4895ef20 100%);
+        color: var(--success);
+    }
+    .feature-card:nth-child(3) .feature-icon {
+        background: linear-gradient(135deg, #f8961e20 0%, #f3722c20 100%);
+        color: var(--warning);
+    }
+    .feature-card:nth-child(4) .feature-icon {
+        background: linear-gradient(135deg, #f7258520 0%, #b5179e20 100%);
+        color: var(--danger);
+    }
+
+    .feature-card:hover .feature-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .feature-title {
+        font-size: 1.6rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: var(--dark);
+        position: relative;
+        z-index: 1;
+    }
+
+    .feature-description {
+        color: #6c757d;
+        margin-bottom: 25px;
+        line-height: 1.6;
+        font-size: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+
+    .feature-btn {
+        display: inline-block;
+        padding: 12px 35px;
+        background: var(--gradient-1);
+        color: var(--white);
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+        box-shadow: var(--shadow-sm);
+    }
+
+    .feature-btn:hover {
+        transform: scale(1.05);
+        box-shadow: var(--shadow-lg);
+        color: var(--white);
+    }
+
+    /* Students Grid */
+    .students-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 30px;
+        margin: 40px 0;
+        animation: fadeInUp 1.2s ease;
+    }
+
+    .student-card {
+        background: var(--white);
+        border-radius: 25px;
+        overflow: hidden;
+        box-shadow: var(--shadow-md);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+        position: relative;
+    }
+
+    .student-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: var(--shadow-hover);
+    }
+
+    .student-header {
+        background: var(--gradient-1);
+        padding: 35px 20px;
+        text-align: center;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .student-header::before {
+        content: "⭐";
+        position: absolute;
+        right: -20px;
+        top: -20px;
+        font-size: 100px;
+        opacity: 0.2;
+        transform: rotate(15deg);
+    }
+
+    .student-avatar {
+        width: 100px;
+        height: 100px;
+        background: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 15px;
+        font-size: 3rem;
+        font-weight: bold;
+        box-shadow: var(--shadow-lg);
+        border: 4px solid rgba(255,255,255,0.3);
+        transition: all 0.3s ease;
+        color: var(--primary);
+    }
+
+    .student-card:hover .student-avatar {
+        transform: scale(1.1) rotate(5deg);
+        border-color: var(--white);
+    }
+
+    .student-name {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .student-roll {
+        font-size: 1rem;
+        opacity: 0.9;
+        background: rgba(255,255,255,0.2);
+        display: inline-block;
+        padding: 5px 20px;
+        border-radius: 50px;
+        backdrop-filter: blur(5px);
+    }
+
+    .student-body {
+        padding: 25px;
+        background: var(--white);
+    }
+
+    .student-info-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding: 10px;
+        background: var(--light);
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+
+    .student-info-row:hover {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        transform: translateX(5px);
+    }
+
+    .info-label {
+        color: #6c757d;
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .info-label i {
+        margin-right: 5px;
+        color: var(--primary);
+    }
+
+    .info-value {
+        font-weight: 700;
+        color: var(--dark);
+    }
+
+    .marks-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding: 15px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: 15px;
+    }
+
+    .percentage-badge {
+        background: var(--gradient-4);
+        padding: 8px 20px;
+        border-radius: 50px;
+        font-weight: 700;
+        color: var(--dark);
+        font-size: 1.1rem;
+    }
+
+    .grade-badge {
+        background: var(--gradient-2);
+        padding: 8px 25px;
+        border-radius: 50px;
+        font-weight: 700;
+        color: var(--white);
+        font-size: 1.2rem;
+        box-shadow: var(--shadow-sm);
+    }
+
+    /* CTA Section */
+    .cta-section {
+        background: var(--gradient-5);
+        border-radius: 30px;
+        padding: 70px 50px;
+        margin: 80px 0 40px;
+        text-align: center;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+        box-shadow: var(--shadow-lg);
+        animation: fadeInUp 1.4s ease;
+    }
+
+    .cta-section::before {
+        content: "🎓 📚 📊";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 150px;
+        opacity: 0.1;
+        white-space: nowrap;
+        animation: slide 20s linear infinite;
+    }
+
+    @keyframes slide {
+        from { transform: translateY(-50%) translateX(-100%); }
+        to { transform: translateY(-50%) translateX(100%); }
+    }
+
+    .cta-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        position: relative;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .cta-description {
+        font-size: 1.3rem;
+        margin-bottom: 40px;
+        opacity: 0.95;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        position: relative;
+        line-height: 1.6;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+        position: relative;
+    }
+
+    .cta-btn {
+        padding: 15px 45px;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        font-size: 1.2rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cta-btn::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.3);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .cta-btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .cta-btn-primary {
+        background: var(--white);
+        color: var(--primary);
+        box-shadow: var(--shadow-md);
+    }
+
+    .cta-btn-primary:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: var(--shadow-lg);
+        color: var(--primary);
+    }
+
+    .cta-btn-secondary {
+        background: transparent;
+        color: var(--white);
+        border: 2px solid var(--white);
+    }
+
+    .cta-btn-secondary:hover {
+        background: var(--white);
+        color: var(--primary);
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* Loading Skeleton */
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite;
+    }
+
+    @keyframes loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+        
+        .hero-stats {
+            gap: 20px;
+        }
+        
+        .hero-stat-item {
+            min-width: 120px;
+            padding: 15px 20px;
+        }
+        
+        .hero-stat-number {
+            font-size: 2rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+        }
+        
+        .cta-description {
+            font-size: 1.1rem;
+        }
+        
+        .cta-btn {
+            padding: 12px 30px;
+            font-size: 1rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-section {
+            padding: 40px 20px;
+        }
+        
+        .hero-stats {
+            flex-direction: column;
+        }
+        
+        .hero-stat-item {
+            width: 100%;
+        }
+    }
+</style>
+
+<!-- Hero Section with Stats -->
+<div class="hero-section">
+    <h1 class="hero-title">🎓 Student Management System</h1>
+    <p class="hero-subtitle">Track student progress anytime • Manage marks efficiently • Calculate results instantly with our smart dashboard</p>
+    
+    <div class="hero-stats">
+        <div class="hero-stat-item">
+            <span class="hero-stat-number">{{ total_students|default:"0" }}</span>
+            <span class="hero-stat-label">Total Students</span>
+        </div>
+        <div class="hero-stat-item">
+            <span class="hero-stat-number">{{ total_subjects|default:"0" }}</span>
+            <span class="hero-stat-label">Subjects</span>
+        </div>
+        <div class="hero-stat-item">
+            <span class="hero-stat-number">{{ total_marks|default:"0" }}</span>
+            <span class="hero-stat-label">Marks Entered</span>
+        </div>
+    </div>
+</div>
+
+<!-- Quick Actions Section -->
+<div class="section-header">
+    <h2 class="section-title">⚡ Quick Actions</h2>
+    <a href="{% url 'view_results' %}" class="view-all-link">
+        View All Results 
+        <span style="font-size: 1.2rem;">→</span>
+    </a>
+</div>
+
+<div class="features-grid">
+    <div class="feature-card">
+        <div class="feature-icon">👤</div>
+        <h3 class="feature-title">Add Student</h3>
+        <p class="feature-description">Register new students with their personal details, roll numbers, and contact information</p>
+        <a href="{% url 'add_student' %}" class="feature-btn">Add Now →</a>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3 class="feature-title">Enter Marks</h3>
+        <p class="feature-description">Record and manage marks for students across different subjects and examinations</p>
+        <a href="{% url 'add_marks' %}" class="feature-btn">Enter Marks →</a>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">View Results</h3>
+        <p class="feature-description">Analyze student performance with detailed reports, percentages, and grade calculations</p>
+        <a href="{% url 'view_results' %}" class="feature-btn">View Now →</a>
+    </div>
+    
+    <div class="feature-card">
+        <div class="feature-icon">🧮</div>
+        <h3 class="feature-title">Calculate Result</h3>
+        <p class="feature-description">Instantly calculate grades and generate comprehensive result cards for students</p>
+        <a href="{% url 'calculate_result' %}" class="feature-btn">Calculate →</a>
+    </div>
+</div>
+
+<!-- Top Performing Students Section -->
+<div class="section-header">
+    <h2 class="section-title">🌟 Top Performing Students</h2>
+    <a href="{% url 'view_results' %}" class="view-all-link">
+        View All Students 
+        <span style="font-size: 1.2rem;">→</span>
+    </a>
+</div>
+
+<div class="students-grid">
+    {% if student_results %}
+        {% for result in student_results %}
+        <div class="student-card">
+            <div class="student-header">
+                <div class="student-avatar">
+                    {% if result.student.name %}
+                        {{ result.student.name|make_list|first|upper }}
+                    {% else %}
+                        👤
+                    {% endif %}
+                </div>
+                <div class="student-name">{{ result.student.name }}</div>
+                <div class="student-roll">Roll No: {{ result.student.roll_number|default:"N/A" }}</div>
+            </div>
+            <div class="student-body">
+                <div class="student-info-row">
+                    <span class="info-label"><i>📧</i> Email</span>
+                    <span class="info-value">{{ result.student.email|truncatechars:18|default:"N/A" }}</span>
+                </div>
+                <div class="student-info-row">
+                    <span class="info-label"><i>📚</i> Subjects</span>
+                    <span class="info-value">{{ result.subject_count }} Subjects</span>
+                </div>
+                <div class="marks-container">
+                    <span class="percentage-badge">{{ result.percentage|floatformat:1 }}%</span>
+                    <span class="grade-badge">Grade {{ result.grade }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <!-- Placeholder Cards -->
+        <div class="student-card">
+            <div class="student-header" style="background: linear-gradient(135deg, #a8c0ff 0%, #3f2b96 100%);">
+                <div class="student-avatar">👤</div>
+                <div class="student-name">No Students Yet</div>
+                <div class="student-roll">Add your first student</div>
+            </div>
+            <div class="student-body" style="text-align: center; padding: 30px;">
+                <p style="color: #6c757d; margin-bottom: 20px;">Get started by adding students to the system</p>
+                <a href="{% url 'add_student' %}" class="feature-btn" style="padding: 10px 25px;">Add Student</a>
+            </div>
+        </div>
+        
+        <div class="student-card">
+            <div class="student-header" style="background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);">
+                <div class="student-avatar">📝</div>
+                <div class="student-name">No Marks Yet</div>
+                <div class="student-roll">Enter marks</div>
+            </div>
+            <div class="student-body" style="text-align: center; padding: 30px;">
+                <p style="color: #6c757d; margin-bottom: 20px;">Add marks to see student performance</p>
+                <a href="{% url 'add_marks' %}" class="feature-btn" style="padding: 10px 25px;">Add Marks</a>
+            </div>
+        </div>
+        
+        <div class="student-card">
+            <div class="student-header" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                <div class="student-avatar">📊</div>
+                <div class="student-name">No Results</div>
+                <div class="student-roll">Calculate now</div>
+            </div>
+            <div class="student-body" style="text-align: center; padding: 30px;">
+                <p style="color: #6c757d; margin-bottom: 20px;">Calculate results to view grades</p>
+                <a href="{% url 'calculate_result' %}" class="feature-btn" style="padding: 10px 25px;">Calculate</a>
+            </div>
+        </div>
+        
+        <div class="student-card">
+            <div class="student-header" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);">
+                <div class="student-avatar">🚀</div>
+                <div class="student-name">Get Started</div>
+                <div class="student-roll">Begin here</div>
+            </div>
+            <div class="student-body" style="text-align: center; padding: 30px;">
+                <p style="color: #6c757d; margin-bottom: 20px;">Start managing your students today</p>
+                <a href="{% url 'add_student' %}" class="feature-btn" style="padding: 10px 25px;">Start Now</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+
+<!-- Call to Action Section -->
+<div class="cta-section">
+    <h2 class="cta-title">Ready to Get Started?</h2>
+    <p class="cta-description">Join thousands of educators who are already managing student records efficiently with our smart system</p>
+    <div class="cta-buttons">
+        <a href="{% url 'add_student' %}" class="cta-btn cta-btn-primary">
+            <span style="margin-right: 8px;">➕</span> Add New Student
+        </a>
+        <a href="{% url 'add_marks' %}" class="cta-btn cta-btn-secondary">
+            <span style="margin-right: 8px;">📝</span> Enter Marks
+        </a>
+    </div>
+</div>
+{% endblock %}
