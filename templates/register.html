@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Register</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #020617);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .card {
+            width: 400px;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: auto;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            background: transparent;
+            color: white;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: white;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #94a3b8;
+        }
+
+        .footer a {
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="logo">SMS</div>
+
+    <h2>Create Account</h2>
+    <p>Register as admin or teacher</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <label>Full Name</label>
+        <input type="text" name="username" placeholder="Full Name" required>
+        <label>Email</label>
+        <input type="email" name="email" placeholder="Email" required>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Min 6 characters" required>
+
+       
+
+        <button type="submit">Create Account</button>
+    </form>
+
+    <div class="footer">
+        Already have an account?
+        <a href="{% url 'login' %}">Sign In</a>
+    </div>
+</div>
+
+</body>
+</html>

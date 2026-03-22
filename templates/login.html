@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: radial-gradient(circle at top left, #1e1b4b, #020617);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .card {
+            width: 400px;
+            padding: 40px;
+            border-radius: 20px;
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 40px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: auto;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #6366f1, #ec4899);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 18px;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 14px;
+            color: #cbd5f5;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #334155;
+            background: transparent;
+            color: white;
+        }
+
+        input::placeholder {
+            color: #64748b;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #94a3b8;
+        }
+
+        .footer a {
+            color: #8b5cf6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="logo">SMS</div>
+
+    <h2>Welcome Back</h2>
+    <p>Sign in to your account</p>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label>Email</label>
+        <input type="text" name="username" placeholder="you@example.com" required>
+
+        <label>Password</label>
+        <input type="password" name="password" placeholder="••••••••" required>
+
+        <button type="submit">Sign In</button>
+    </form>
+
+    <div class="footer">
+        Don't have an account?
+        <a href="{% url 'register' %}">Register</a>
+    </div>
+</div>
+
+</body>
+</html>
